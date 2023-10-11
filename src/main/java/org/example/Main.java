@@ -31,6 +31,16 @@ public class Main {
         JavascriptExecutor js = (JavascriptExecutor) driver ;
         js.executeScript("arguments[0].scrollIntoView();",button);
         button.click();
+        String name;
+        WebElement userNameOutput = driver.findElement(By.xpath("//p[@id='name']"));
+        WebElement userEmailOutput = driver.findElement(By.xpath("//p[@id='email']"));
+        WebElement userCurAddrOutput = driver.findElement(By.xpath("//p[@id='currentAddress']"));
+        WebElement userPurAddrOutput = driver.findElement(By.xpath("//p[@id='permanentAddress']"));
+        name = userNameOutput.getText();
+        String email = userEmailOutput.getText();
+        String curAddr = userCurAddrOutput.getText();
+        String purAddr = userPurAddrOutput.getText();
+        System.out.println(name + " " + email + " " + curAddr + " " + purAddr + " ");
 
 
 
