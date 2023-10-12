@@ -3,6 +3,7 @@ package waits;
 import browser.Browser;
 import main_pages.MainPage;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -47,6 +48,12 @@ public class Wait_test {
     public void step_02(){
         elementsPage.openStartPage();
         mainPage.openCategoryElements();
-
+        elementsPage.click("//span[text()='Dynamic Properties']");
+        String xpath = "//button[@id='enableAfter']";
+        new WebDriverWait(driver,Duration.ofSeconds(10))
+                .until(d -> elementsPage.findElement(xpath).isEnabled());
+        /*new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(elementsPage.findElement(xpath)));*/
+        Assert.assertTrue(elementsPage.findElement(xpath).isEnabled());
     }
 }

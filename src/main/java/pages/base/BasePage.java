@@ -17,6 +17,8 @@ public class BasePage {
     public BasePage(WebDriver driver){
         this.driver = driver;
     }
+
+    public static final String CHECK_BOX_LOCATOR = "//input[@type='checkbox'][following-sibling::span[contains(text(),'%s')]]";
     public void openUrl(String url){
         driver.get(url);
     }
@@ -60,5 +62,17 @@ public class BasePage {
 
     public void waitElementDisplayed (String locator){
         waitElementDisplayed(locator,EXPLICIT_WAIT);
+    }
+
+    public boolean getCheckBoxState(String checkBoxName){
+        String locator = String.format(CHECK_BOX_LOCATOR,checkBoxName);
+        return findElement(locator).isSelected();
+    }
+
+    public void setCheckBox(String checkBoxName, boolean state){
+        String locator = String.format(CHECK_BOX_LOCATOR,checkBoxName) + "/following-sibling::span[@class='rct-checkbox']";
+        if(!getCheckBoxState(checkBoxName)==state){
+            click(locator);
+        }
     }
 }
