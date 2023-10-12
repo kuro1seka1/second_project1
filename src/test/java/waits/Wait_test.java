@@ -1,31 +1,25 @@
-package text_box_tests;
+package waits;
 
 import browser.Browser;
 import main_pages.MainPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pages.base.BasePage;
 import pages.elements.ElementsPage;
 
 import java.time.Duration;
 
-import static constants.Constant.URLS.START_PAGE_URL;
-
-public class Test1 {
+public class Wait_test {
     private WebDriver driver;
     //private BasePage basePage;
     private MainPage mainPage;
     private ElementsPage elementsPage;
 
     @BeforeClass
-    public void beforeClass(){
+    public void beforeClass() {
         driver = Browser.createDriver();
         //basePage = new BasePage(driver);
         mainPage = new MainPage(driver);
@@ -33,19 +27,26 @@ public class Test1 {
         //basePage.openStartPage();
 
     }
+
     @AfterClass
-    public void afterClass(){
+    public void afterClass() {
         driver.quit();
     }
-    @Test
-    public void step_01(){
-        //basePage.click("//div[@class='card mt-4 top-card']/div[div/h5[text()='Elements']]");
-        elementsPage = mainPage.openCategoryElements();
-        String text = mainPage.getText("//div[@class='col-12 mt-4 col-md-6']");
-        String textResult = "Please select an item from left to start practice.";
-        Assert.assertTrue(text.equals(textResult));
-        Assert.assertEquals(text,textResult);
 
+    @Test
+    public void step_01() {
+        String xpath = "//button[@id='visibleAfter']";
+        elementsPage = mainPage.openCategoryElements();
+        elementsPage.click("//span[text()='Dynamic Properties']");
+        elementsPage.waitElementDisplayed(xpath);
+        elementsPage.click(xpath);
+        Assert.assertTrue(elementsPage.findElement(xpath).isDisplayed());
+    }
+
+    @Test
+    public void step_02(){
+        elementsPage.openStartPage();
+        mainPage.openCategoryElements();
 
     }
 }

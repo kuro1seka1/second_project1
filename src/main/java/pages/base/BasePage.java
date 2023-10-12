@@ -4,9 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
+import static constants.Constant.TimeoutVariable.EXPLICIT_WAIT;
 import static constants.Constant.URLS.START_PAGE_URL;
 
 public class BasePage {
@@ -49,5 +52,13 @@ public class BasePage {
 
     public String getText(String locator){
         return findElement(locator).getText();
+    }
+
+    public void waitElementDisplayed(String locator, int second){
+        new WebDriverWait(driver, Duration.ofSeconds(second)).until(d-> findElement(locator).isDisplayed());
+    }
+
+    public void waitElementDisplayed (String locator){
+        waitElementDisplayed(locator,EXPLICIT_WAIT);
     }
 }
