@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import pages.base.BasePage;
 import pages.forms.FormsPage;
 
-import static pages.forms.FormsPage.FIRST_NAME;
+import static pages.forms.FormsPage.*;
 
 public class Forms_Test {
     private WebDriver driver;
@@ -39,8 +39,23 @@ public class Forms_Test {
         formsPage.setFirstName("Name");
         formsPage.setLastName("lastname");
         formsPage.setUserEmail("4tar111@gmail.com");
-        formsPage.setSex(1);
+        formsPage.setSex(2);
         formsPage.setUserMobNumber("+46237642");
+        formsPage.openDatePicker();
+        formsPage.setSelectDate(24);
+        formsPage.setHobbies("Sports");
+        formsPage.setAutocompliteUnfocus();
+        formsPage.setAutocompliteFocus("M");
+        formsPage.chooseAutocompliteWord("Maths");
+        formsPage.click(SELECT_STATE_LOCATOR);
+        formsPage.setState(1);
+        formsPage.click(SELECT_CITY_LOCATOR);
+        formsPage.setCity(1);
+        formsPage.deleteHtmlElement(FOOTER_LOCATOR);
+        formsPage.clickByJS(SUBMIT_BTN);
+        String s = formsPage.finalCheck();
+        String finalphrase = "Thanks for submitting the form";
+        Assert.assertTrue(s.equals(finalphrase));
 
     }
 }

@@ -8,5 +8,6 @@ public class Constant {
 
     public static class URLS{
         public static final String START_PAGE_URL = "https://demoqa.com/";
+
     }
 }

@@ -8,8 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.buttons.ButtonsPage;
 
-import static pages.buttons.ButtonsPage.DOUBLE_CLICK_TEXT;
-import static pages.buttons.ButtonsPage.DOUBLE_TEXT_CHECK;
+import static pages.buttons.ButtonsPage.*;
 
 public class Test_Button {
     private WebDriver driver;
@@ -19,6 +18,7 @@ public class Test_Button {
     public void beforeClass() {
         driver = Browser.createDriver();
         buttonsPage = new ButtonsPage(driver);
+        buttonsPage.openUrl("https://demoqa.com/buttons");
     }
 
         @AfterClass
@@ -31,12 +31,22 @@ public class Test_Button {
 
     @Test
     public void step_01(){
-        buttonsPage.openStartPage();
-        buttonsPage.openUrl("https://demoqa.com/buttons");
         buttonsPage.clickDoubleClickBtn();
-        String text = buttonsPage.getText("You have done a double click");
-        buttonsPage.waitElementDisplayed(DOUBLE_TEXT_CHECK,10);
+        buttonsPage.waitElementDisplayed(DOUBLE_TEXT_CHECK);
+        String text = buttonsPage.getText(DOUBLE_TEXT_CHECK);
         Assert.assertTrue(text.equals(DOUBLE_CLICK_TEXT));
+    }
+    public void step_02(){
+        buttonsPage.rightClick(RIGHT_CLICK_BTN);
+        buttonsPage.waitElementDisplayed(RIGHT_CLICK_TEXT_CHECK);
+        String text = buttonsPage.getText(RIGHT_CLICK_TEXT_CHECK);
+        Assert.assertTrue(text.equals(RIGHT_CLICK_TEXT));
+    }
+    public void step_03(){
+        buttonsPage.rightClick(DYNAMIC_BTN);
+        buttonsPage.waitElementDisplayed(DYNAMIC_CLICK_TEXT_CHECK);
+        String text = buttonsPage.getText(DYNAMIC_CLICK_TEXT_CHECK);
+        Assert.assertTrue(text.equals(DYNAMIC_CLICK_TEXT));
     }
 
 }

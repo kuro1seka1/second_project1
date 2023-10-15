@@ -16,10 +16,11 @@ import static constants.Constant.URLS.START_PAGE_URL;
 
 public class BasePage {
     protected WebDriver driver;
+
     public BasePage(WebDriver driver){
         this.driver = driver;
     }
-    Actions actions = new Actions(driver);
+
     public static final String CHECK_BOX_LOCATOR = "//input[@type='checkbox'][following-sibling::span[contains(text(),'%s')]]";
     public void openUrl(String url){
         driver.get(url);
@@ -41,11 +42,12 @@ public class BasePage {
         findElement(locator).click();
     }
     public  void doubleClick(String locator){
-
+        Actions actions = new Actions(driver);
         WebElement elementLocator = findElement(locator);
-        actions.doubleClick(elementLocator);
+        actions.doubleClick(elementLocator).perform();
     }
     public  void rightClick(String locator){
+        Actions actions = new Actions(driver);
         WebElement link = findElement(locator);
         actions.contextClick(link).perform();
     }
@@ -87,4 +89,15 @@ public class BasePage {
             click(locator);
         }
     }
+    public void deleteHtmlElement(String locator){
+        WebElement t = driver.findElement(By.xpath(locator));
+        JavascriptExecutor js  = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].remove();",t);
+    }
+    public void clickByJS(String locator){
+        WebElement t = driver.findElement(By.xpath(locator));
+        JavascriptExecutor js  = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click();",t);
+    }
+
 }
