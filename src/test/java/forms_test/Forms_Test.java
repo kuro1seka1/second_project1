@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 import pages.base.BasePage;
 import pages.forms.FormsPage;
 
+import java.time.Duration;
+
 import static pages.forms.FormsPage.*;
 
 public class Forms_Test {
@@ -39,6 +41,7 @@ public class Forms_Test {
         formsPage.setFirstName("Name");
         formsPage.setLastName("lastname");
         formsPage.setUserEmail("4tar111@gmail.com");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         formsPage.setSex(2);
         formsPage.setUserMobNumber("+46237642");
         formsPage.openDatePicker();
@@ -46,7 +49,7 @@ public class Forms_Test {
         formsPage.setHobbies("Sports");
         formsPage.setAutocompliteUnfocus();
         formsPage.setAutocompliteFocus("M");
-        formsPage.chooseAutocompliteWord("Maths");
+        formsPage.chooseAutocompliteWord();
         formsPage.click(SELECT_STATE_LOCATOR);
         formsPage.setState(1);
         formsPage.click(SELECT_CITY_LOCATOR);

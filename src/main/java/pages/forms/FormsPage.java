@@ -1,12 +1,7 @@
 package pages.forms;
 
-import main_pages.MainPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import pages.base.BasePage;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FormsPage extends BasePage {
 
@@ -23,7 +18,7 @@ public class FormsPage extends BasePage {
     public static final String SELECT_DATE = "//div[@class='react-datepicker__week']//*[text()='%d']";
 
     public static final String AUTOCOMPLITE_UNFOCUS = "//*[@id='subjectsInput']";
-    public static final String AUTOCOMPLITE_FOCUS = "//*[@id='react-select-2-option-0'][text()='%s']";
+    public static final String AUTOCOMPLITE_MATHS = "//*[@id='react-select-2-option-0'][text()='Maths']";
     public static final String HOBBIES_LOCATOR="//*[@for='hobbies-checkbox-1'][text()='%s']";
     public static final String SELECT_STATE_LOCATOR = "//*[@class=' css-1wa3eu0-placeholder'][text()='Select State']";
     public static final String SELECT_STATE_INNER = "//*[@id='react-select-3-option-%s']";
@@ -31,7 +26,7 @@ public class FormsPage extends BasePage {
     public static final String SELECT_CITY_INNER= "//*[@id='react-select-4-option-%s']";
     public static final String SUBMIT_BTN = "//button[@id='submit']";
     public static final String FOOTER_LOCATOR = "//footer";
-    public static final String FINAL_WORDS = "//div[@id='example-modal-sizes-title-lg']";
+    public static final String FINAL_WORDS = "//*[@class='modal-title h4']";
 
 
 
@@ -82,9 +77,9 @@ public class FormsPage extends BasePage {
         sendKeys(AUTOCOMPLITE_UNFOCUS,word);
 
     }
-    public void chooseAutocompliteWord(String word){
-        String t = String.format(AUTOCOMPLITE_FOCUS,word);
-        click(t);
+    public void chooseAutocompliteWord(){
+        findElement(AUTOCOMPLITE_MATHS);
+        click(AUTOCOMPLITE_MATHS);
     }
     public void setHobbies(String hobbies){
         String formated = String.format(HOBBIES_LOCATOR,hobbies);
